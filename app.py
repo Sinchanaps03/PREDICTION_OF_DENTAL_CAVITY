@@ -1,5 +1,6 @@
 from flask import Flask, render_template, url_for, request
 from tensorflow.keras.models import load_model
+from tensorflow.keras.applications.resnet50 import preprocess_input
 import pickle
 import shutil
 import sqlite3
@@ -23,18 +24,19 @@ with open('class_names.pkl', 'rb') as f:
     class_names = pickle.load(f)
 
 def predict_image(image):
-    img =load_img(image, target_size=(150, 150))
-    img_array =img_to_array(img)
-    img_array = np.expand_dims(img_array, axis=0) / 255.0
+    img = load_img(image, target_size=(150, 150))
+    img_array = img_to_array(img)
+    img_array = preprocess_input(img_array)
+    img_array = np.expand_dims(img_array, axis=0)
 
     prediction = model.predict(img_array)
     predicted_class_index = np.argmax(prediction)
     print(predicted_class_index)
     predicted_class = class_names[predicted_class_index]
-    print("predicted_class:",predicted_class)
+    print("predicted_class:", predicted_class)
     prediction1 = prediction.tolist()
-    print(prediction1[0][predicted_class_index]*100)
-    return predicted_class, prediction1[0][predicted_class_index]*100
+    print(prediction1[0][predicted_class_index] * 100)
+    return predicted_class, prediction1[0][predicted_class_index] * 100
 
 connection = sqlite3.connect('user_data.db')
 cursor = connection.cursor()

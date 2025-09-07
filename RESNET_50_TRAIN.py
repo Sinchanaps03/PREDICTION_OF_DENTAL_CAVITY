@@ -4,6 +4,7 @@ from tensorflow.keras.models import Sequential, Model
 from tensorflow.keras.layers import Flatten, Dense
 from tensorflow.keras.applications import ResNet50
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
+from tensorflow.keras.applications.resnet50 import preprocess_input
 import matplotlib.pyplot as plt
 import pickle
 import seaborn as sns
@@ -19,8 +20,8 @@ batch_size = 32
 
 # Function to load data using flow_from_directory and store class names
 def load_data(train_dir, test_dir):
-    train_datagen = ImageDataGenerator(rescale=1./255)
-    test_datagen = ImageDataGenerator(rescale=1./255)
+    train_datagen = ImageDataGenerator(preprocessing_function=preprocess_input)
+    test_datagen = ImageDataGenerator(preprocessing_function=preprocess_input)
 
     train_generator = train_datagen.flow_from_directory(
         train_dir,
@@ -62,7 +63,7 @@ def train_resnet50(train_generator, test_generator, class_names):
     history = model.fit(
         train_generator,
         steps_per_epoch=train_generator.samples // batch_size,
-        epochs=1  # You can adjust the number of epochs
+        epochs=5  # You can adjust the number of epochs
     )
 
     return model, history
