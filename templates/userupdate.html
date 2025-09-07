@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Update User Credentials</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <style>
+        body {
+            background-image: url('https://media.licdn.com/dms/image/v2/D4E12AQEFGBb3VtWJTA/article-cover_image-shrink_720_1280/article-cover_image-shrink_720_1280/0/1705507048123?e=2147483647&v=beta&t=YI-_GqWn7LbDQd4xCvh8JToK2EgdjmSuoJZKjozfrGc');
+            background-size: 100% 100vh;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding: 50px;
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+        }
+        .update-form {
+            background-color: rgba(0, 0, 0, 0.50);
+            padding: 30px;
+            border-radius: 12px;
+            max-width: 400px;
+            width: 100%;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-weight: 700;
+            letter-spacing: 1.2px;
+            color: white;
+        }
+        input[type=text], input[type=password] {
+            width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0 20px 0;
+            display: inline-block;
+            border: 2px solid white;
+            border-radius: 8px;
+            box-sizing: border-box;
+            font-size: 1rem;
+            background-color: transparent;
+            color: white;
+            transition: border-color 0.3s ease;
+        }
+        input[type=text]:focus, input[type=password]:focus {
+            border-color: #ffffff;
+            outline: none;
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        input[type=submit] {
+            width: 100%;
+            background-color: transparent;
+            color: white;
+            padding: 14px 20px;
+            margin-top: 10px;
+            border: 1px solid white;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        input[type=submit]:hover {
+            background-color: white;
+            color: black;
+        }
+        .message {
+            text-align: center;
+            margin-top: 15px;
+            color: #ff6666;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <div class="update-form">
+        <h2>Update Username and Password</h2>
+        {% if msg %}
+            <div class="message">{{ msg }}</div>
+        {% endif %}
+        <form method="POST" action="{{ url_for('userupdate') }}">
+            <label for="oldname">Current Username</label>
+            <input type="text" id="oldname" name="oldname" placeholder="Enter current username" required>
+
+            <label for="oldpassword">Current Password</label>
+            <input type="password" id="oldpassword" name="oldpassword" placeholder="Enter current password" required>
+
+            <label for="newname">New Username</label>
+            <input type="text" id="newname" name="newname" placeholder="Enter new username" required>
+
+            <label for="newpassword">New Password</label>
+            <input type="password" id="newpassword" name="newpassword" placeholder="Enter new password" required>
+
+            <input type="submit" value="Update">
+        </form>
+    </div>
+</body>
+</html>

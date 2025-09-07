@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Prediction of Dental Cavity - Choose File</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-image: url('https://media.springernature.com/w580h326/nature-cms/uploads/collections/BDJ_Digital_Dentistry_Hero_Image-496e0e3a937bab057622f258d85c4724.jpg');
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      font-family: Arial, sans-serif;
+      color: white;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    h1 {
+      font-weight: bold;
+      font-size: 2.5rem;
+      text-align: center;
+      margin-bottom: 40px;
+      text-transform: uppercase;
+      text-shadow: 0 0 10px #00ffff;
+    }
+    form {
+      background-color: rgba(0, 0, 0, 0.6);
+      padding: 30px 40px;
+      border-radius: 10px;
+      box-shadow: 0 0 20px #00ffff;
+      width: 400px;
+      text-align: center;
+    }
+    label {
+      font-size: 1.5rem;
+      display: block;
+      margin-bottom: 15px;
+      border-bottom: 1px solid #00ffff;
+      padding-bottom: 10px;
+      text-align: left;
+    }
+    input[type="file"] {
+      width: 100%;
+      padding: 8px;
+      border-radius: 5px;
+      border: 1px solid #00ffff;
+      background-color: transparent;
+      color: white;
+      cursor: pointer;
+      margin-bottom: 30px;
+    }
+    input[type="submit"] {
+      width: 100%;
+      padding: 12px;
+      border: 2px solid #00ffff;
+      border-radius: 8px;
+      background-color: transparent;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+    input[type="submit"]:hover {
+      background-color: #00ffff;
+      color: black;
+    }
+  </style>
+</head>
+<body>
+  <h1>PREDICTION OF DENTAL CAVITY USING DEEP LEARNING</h1>
+  <form method="post" action="/analyse" enctype="multipart/form-data">
+    <label for="image">Select Image</label>
+    <input type="file" id="image" name="image" accept="image/*" required />
+    <input type="submit" value="Analyse" />
+  </form>
+</body>
+</html>
