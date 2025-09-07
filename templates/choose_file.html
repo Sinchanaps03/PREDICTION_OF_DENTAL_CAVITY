@@ -1,85 +1,77 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Prediction of Dental Cavity - Choose File</title>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" />
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      background-image: url('https://media.springernature.com/w580h326/nature-cms/uploads/collections/BDJ_Digital_Dentistry_Hero_Image-496e0e3a937bab057622f258d85c4724.jpg');
-      background-size: cover;
-      background-repeat: no-repeat;
-      background-attachment: fixed;
-      font-family: Arial, sans-serif;
-      color: white;
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-    }
-    h1 {
-      font-weight: bold;
-      font-size: 2.5rem;
-      text-align: center;
-      margin-bottom: 40px;
-      text-transform: uppercase;
-      text-shadow: 0 0 10px #00ffff;
-    }
-    form {
-      background-color: rgba(0, 0, 0, 0.6);
-      padding: 30px 40px;
-      border-radius: 10px;
-      box-shadow: 0 0 20px #00ffff;
-      width: 400px;
-      text-align: center;
-    }
-    label {
-      font-size: 1.5rem;
-      display: block;
-      margin-bottom: 15px;
-      border-bottom: 1px solid #00ffff;
-      padding-bottom: 10px;
-      text-align: left;
-    }
-    input[type="file"] {
-      width: 100%;
-      padding: 8px;
-      border-radius: 5px;
-      border: 1px solid #00ffff;
-      background-color: transparent;
-      color: white;
-      cursor: pointer;
-      margin-bottom: 30px;
-    }
-    input[type="submit"] {
-      width: 100%;
-      padding: 12px;
-      border: 2px solid #00ffff;
-      border-radius: 8px;
-      background-color: transparent;
-      color: white;
-      font-weight: bold;
-      cursor: pointer;
-      transition: background-color 0.3s ease, color 0.3s ease;
-    }
-    input[type="submit"]:hover {
-      background-color: #00ffff;
-      color: black;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <title>Choose Sample Image</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            color: #343a40;
+            text-align: center;
+            margin-bottom: 30px;
+            font-weight: 700;
+            font-size: 2.5rem;
+        }
+        .image-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+        .image-item {
+            width: 180px;
+            cursor: pointer;
+            text-align: center;
+            background-color: #ffffff;
+            border: 1px solid #dee2e6;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            padding: 15px;
+        }
+        .image-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 24px rgba(0,0,0,0.2);
+        }
+        .image-item img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            border: 2px solid transparent;
+            transition: border-color 0.3s ease;
+        }
+        .image-item img:hover {
+            border-color: #007bff;
+        }
+        .image-item p {
+            font-weight: 600;
+            color: #495057;
+            font-size: 1rem;
+            margin: 0;
+        }
+    </style>
 </head>
 <body>
-  <h1>PREDICTION OF DENTAL CAVITY USING DEEP LEARNING</h1>
-  <form method="post" action="/analyse" enctype="multipart/form-data">
-    <label for="image">Select Image</label>
-    <input type="file" id="image" name="image" accept="image/*" required />
-    <input type="submit" value="Analyse" />
-  </form>
+    <h1>Select a Sample Image for Prediction</h1>
+    {% if sample_images %}
+    <div class="image-grid">
+        {% for image in sample_images %}
+        <div class="image-item">
+            <a href="{{ url_for('predict_sample', filename=image) }}">
+                <img src="{{ url_for('static', filename='../test/' + image) }}" alt="{{ image }}">
+            </a>
+            <p>{{ image }}</p>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <p>No sample images available.</p>
+    {% endif %}
 </body>
 </html>
